@@ -4,7 +4,9 @@ a standalone JMonkeyEngine hello world App
 This is a simple starter application that does not depend on the great but heavyweight JMonkeyEngine SDK.
 It can be used for quick demonstration purposes without the need for the SDK, or for portability testing of the JME (it was developed for this purpose initially, after the author met some issues with testing a JME-based application on MacOSX).
 
-You will just need `maven` (and optionally `make`) to build and run it (they can now also be made available on Windows thanks to the [chocolatey](https://chocolatey.org/) package manager)
+You will just need `maven` (and optionally `make`) to build and run it (they can now also be made available on Windows thanks to the [chocolatey](https://chocolatey.org/) package manager).
+
+An advice for Maven users on the Windows command line: do not install your JDK under `C:\Program Files` (or any path containing spaces). From the author's experience, even recent versions of Maven may have trouble with paths containing spaces.
 
 For building the project:
 `mvn build` or `make comp` or `make compile`
