@@ -11,7 +11,7 @@ You will just need `maven` (and optionally `make`) to build and run it (they can
 An advice for Maven users on the Windows command line: do not install your JDK under `C:\Program Files` (or any path containing spaces). From the author's experience, even recent versions of Maven may have trouble with paths containing spaces.
 
 For building the project:
-`mvn build` or `make comp` or `make compile`
+`mvn compile` or `make comp` or `make compile`
 
 For packaging the project (building a jar file):
 `mvn package` or `make`
