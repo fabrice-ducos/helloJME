@@ -11,12 +11,21 @@ import com.jme3.system.JmeContext.Type;
 
 public class JMonkeyApp extends SimpleApplication implements Runnable {
 
+    // modes include: Type.Display (default), Type.Canvas, Type.Headless (server), Type.OffscreenSurface
+    JmeContext.Type context;
+    
     public static void main(String[] args) {
-        JMonkeyApp app = new JMonkeyApp();
+	JmeContext.Type context = Type.Display;
+	showArguments(args);
+	if (args.length > 0) {
+	    context = parseContextArg(args[0]);
+	}
+        JMonkeyApp app = new JMonkeyApp(context);
         app.run();
     }
     
-    public JMonkeyApp() {
+    public JMonkeyApp(JmeContext.Type context) {
+	this.context = context;
 	AppSettings settings = new AppSettings(true);
         settings.setTitle("Default Scene");
         setSettings(settings);
@@ -24,9 +33,7 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
 
     @Override
     public void run() {
-        // modes include: Type.Display (default), Type.Canvas, Type.Headless (server), Type.OffscreenSurface
-	JmeContext.Type mode = Type.Display;
-        start(mode);
+        start(context);
     }
 
     @Override
@@ -44,5 +51,25 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
     @Override
     public void simpleUpdate(float tpf) {
         //TODO: add update code
+    }
+
+    private static JmeContext.Type parseContextArg(final String contextArg) {
+	switch (contextArg.toLowerCase()) {
+	case "display": return Type.Display;
+	case "canvas": return Type.Canvas;
+	case "headless": return Type.Headless;
+	case "offscreen": return Type.OffscreenSurface;
+	default:
+	    System.err.println("Unknown context: " + contextArg + " (passed as first argument). Valid values are: display, canvas, headless and offscreen");
+	    System.exit(1);
+	}
+
+	return Type.Display; // in principle unreachable, but to avoid a warning from some compilers
+    }
+    
+    private static void showArguments(final String[] args) {
+	for (int i = 0 ; i < args.length ; i++) {
+	    System.out.println("argument " + i + ": " + args[i]);
+	}
     }
 }

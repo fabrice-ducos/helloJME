@@ -104,6 +104,9 @@
               <goals><goal>java</goal></goals>
               <configuration>
                 <mainClass>org.mydomain.myproject.JMonkeyApp</mainClass>
+		<arguments>
+		  <argument>display</argument>
+		</arguments>
               </configuration>
             </execution>
           </executions>
