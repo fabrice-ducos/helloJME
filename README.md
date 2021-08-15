@@ -17,6 +17,9 @@ For packaging the project (building a jar file):
 For launching the project:
 `mvn exec:java@run` or `make run` (this will build the project if it was not done first)
 
+For launching the project within an explicit context:
+`mvn exec:java@run -Djme-context=display # valid contexts include: display (default), canvas, headless, offscreen`
+
 For launching tests:
 `mvn test` or `make test`
 
