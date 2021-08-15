@@ -43,3 +43,19 @@ For cleaning:
 ```
 
 The POM file refers to LWJGL3. If one wants to use LWJGL2, one just needs to replace lwjgl3 with lwjgl in the dependency section for jme3-lwjgl.
+
+## Known successful builds and execution:
+- Windows 10 with AdoptOpenJDK 11.0.12 (Eclipse Temurin)
+- Linux Mint
+
+## Known failures:
+- Linux Ubuntu 20.04 image on Windows 10 (WSL2) with AdoptOpenJDK 11.0.6 and VCXSRV X-server (Xming doesn't support GLX 1.3+ anyway): failure at runtime (not build)
+  ```
+  libGL error: No matching fbConfigs or visuals found
+  libGL error: failed to load driver: swrast
+  ```
+- MacOSX 11.4 Big Sur with AdoptOpenJDK 11.0.4: failure at runtime (not build): 
+  dependencies (openal and lwjgl) retrieved by Maven are not signed and OSX will refuse to load them
+  ```
+  code signature not valid ... mapped file has no cdhash, completely unsigned? Code has to be at least ad-hoc signed
+  ```
