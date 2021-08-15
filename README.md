@@ -46,7 +46,7 @@ The POM file refers to LWJGL3. If one wants to use LWJGL2, one just needs to rep
 
 ## Known successful builds and execution:
 - Windows 10 with AdoptOpenJDK 11.0.12 (Eclipse Temurin)
-- Linux Mint
+- Linux Mint 19 Cinnamon with AdoptOpenJDK 11.0.12
 
 ## Known failures:
 - Linux Ubuntu 20.04 image on Windows 10 (WSL2) with AdoptOpenJDK 11.0.6 and VCXSRV X-server (Xming doesn't support GLX 1.3+ anyway): failure at runtime (not build)
