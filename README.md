@@ -64,3 +64,5 @@ The POM file refers to LWJGL3. If one wants to use LWJGL2, one just needs to rep
   ```
   code signature not valid ... mapped file has no cdhash, completely unsigned? Code has to be at least ad-hoc signed
   ```
+- the canvas context fails with lwjgl3 (on all systems). This has been a known issue of the JME with lwjgl3 for years (https://github.com/jMonkeyEngine/jmonkeyengine/issues/1192)
+  Replace `jme3-lwjgl3` by `jme3-lwjgl` in the dependencies of the `pom.xml` file for testing with canvas.
