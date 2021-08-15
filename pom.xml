@@ -65,7 +65,8 @@
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+	  <version>3.0.2</version>
+	  <configuration><mainClass>org.mydomain.myproject.JMonkeyApp</mainClass></configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

@@ -7,10 +7,10 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class JMonkeyAppTest 
 {
     /**
-     * Rigorous Test :-)
+     * (should fail actually ;) )
      */
     @Test
     public void shouldAnswerWithTrue()

@@ -15,6 +15,9 @@ all: $(jarfile)
 $(jarfile): src/main/java/$(tld)/$(domainBase)/$(artifactId)/*.java
 	$(MVN) package
 
+comp compile:
+	$(MVN) compile
+
 run: $(jarfile)
 	$(MVN) exec:java@run
 
