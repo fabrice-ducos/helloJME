@@ -105,7 +105,7 @@
               <configuration>
                 <mainClass>org.mydomain.myproject.JMonkeyApp</mainClass>
 		<arguments>
-		  <argument>display</argument>
+			<argument>display</argument> <!-- valid contexts include: display, canvas, headless, offscreen -->
 		</arguments>
               </configuration>
             </execution>
