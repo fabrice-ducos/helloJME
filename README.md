@@ -15,7 +15,7 @@ For packaging the project (building a jar file):
 `mvn package` or `make`
 
 For launching the project:
-`mvn exec:java@run` or `make run`
+`mvn exec:java@run` or `make run` (this will build the project if it was not done first)
 
 For launching tests:
 `mvn test` or `make test`
