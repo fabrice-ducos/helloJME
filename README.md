@@ -41,3 +41,5 @@ For cleaning:
                     └── myproject
                         └── JMonkeyAppTest.java
 ```
+
+The POM file refers to LWJGL3. If one wants to use LWJGL2, one just needs to replace lwjgl3 with lwjgl in the dependency section for jme3-lwjgl.
