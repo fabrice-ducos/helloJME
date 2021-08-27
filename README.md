@@ -61,10 +61,12 @@ The POM file refers to LWJGL3. If one wants to use LWJGL2, one just needs to rep
   libGL error: No matching fbConfigs or visuals found
   libGL error: failed to load driver: swrast
   ```
-- MacOSX 11.4 Big Sur with AdoptOpenJDK 11.0.4: failure at runtime (not build): 
+- MacOSX 11.5.2 Big Sur with AdoptOpenJDK 11.0.4: failure at runtime (not build): 
   dependencies (openal and lwjgl) retrieved by Maven are not signed and OSX will refuse to load them
   ```
   code signature not valid ... mapped file has no cdhash, completely unsigned? Code has to be at least ad-hoc signed
   ```
+  This is actually an issue caused by AdoptOpenJDK 11.0.4 (see [Issue #1211](https://github.com/adoptium/temurin-build/issues/1211) in the [temurin-build](https://github.com/adoptium/temurin-build) repo).
+    
 - the canvas context fails with lwjgl3 (on all systems). This has been a known issue of the JME with lwjgl3 for years (https://github.com/jMonkeyEngine/jmonkeyengine/issues/1192)
   Replace `jme3-lwjgl3` by `jme3-lwjgl` in the dependencies of the `pom.xml` file for testing with canvas.
