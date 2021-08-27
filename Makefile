@@ -4,9 +4,11 @@ artifactId=myproject
 jarfile=target/$(artifactId)-$(version).jar
 
 JAVA=java
-#MAVEN_FLAGS=-X
-MAVEN_FLAGS=
-MVN=mvn $(MAVEN_FLAGS)
+
+# this is required on MacOSX
+MAVEN_OPTS=-XstartOnFirstThread
+
+MVN=mvn
 
 .PHONY: test run clean
 
@@ -18,6 +20,8 @@ $(jarfile): src/main/java/$(tld)/$(domainBase)/$(artifactId)/*.java
 comp compile:
 	$(MVN) compile
 
+# there are some shortcomings with exec:java, in some cases exec:exec may be better;
+# see: https://stackoverflow.com/questions/15013651/using-maven-execexec-with-arguments
 run: $(jarfile)
 	$(MVN) exec:java@run
 
