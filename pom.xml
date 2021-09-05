@@ -100,6 +100,7 @@
           <version>1.4.0</version>
 
           <executions>
+            
             <execution>
               <id>run</id>
               <goals><goal>java</goal></goals>
@@ -110,6 +111,22 @@
 		</arguments>
               </configuration>
             </execution>
+
+            <execution>
+              <id>run-osx</id>
+              <goals><goal>exec</goal></goals>
+              <configuration>
+                <executable>java</executable>
+		<arguments>
+                        <argument>-XstartOnFirstThread</argument>
+                        <argument>-classpath</argument>
+                        <classpath />
+                        <argument>org.mydomain.myproject.JMonkeyApp</argument>
+			<argument>${jme-context}</argument> <!-- valid contexts include: display, canvas, headless, offscreen -->
+		</arguments>
+              </configuration>
+            </execution>
+
           </executions>
         </plugin>
       </plugins>
