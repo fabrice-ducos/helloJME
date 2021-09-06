@@ -41,6 +41,20 @@
       <version>3.4.0-stable</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.jmonkeyengine/jme3-plugins -->
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-plugins</artifactId>
+      <version>3.4.0-stable</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.jmonkeyengine/jme3-jogg -->
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-jogg</artifactId>
+      <version>3.4.0-stable</version>
+    </dependency>
+
   </dependencies>
 
   <build>
