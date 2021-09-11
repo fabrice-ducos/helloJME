@@ -58,6 +58,13 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
 
 	return displayScale;
     }
+
+    private float getDisplayScale() {
+	LwjglWindow lwjglContext = (LwjglWindow) context; // context is the Jme context
+	long wh = lwjglContext.getWindowHandle();
+
+	return getDisplayScale(wh);
+    }
     
     private void setFramebufferSizeCallback() {
 	LwjglWindow lwjglContext = (LwjglWindow) context; // context is the Jme context
@@ -65,9 +72,9 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
 
 	float displayScale = getDisplayScale(wh);
 	
-	/* some screens (e.g. Retina for MacBook Pro) require this */
+	/* some screens (e.g. Retina for MacBook Pro) may require this */
 	GLFW.glfwSetFramebufferSizeCallback(wh, (long window, int width, int height) -> {
-		GLFW.glfwSetWindowSize(window, (int) (width / displayScale), (int) (height / displayScale));
+		//GLFW.glfwSetWindowSize(window, (int) (width / displayScale), (int) (height / displayScale));
 		// or should it be:
 		//GL33.glViewport(0, 0, (int) (width / displayScale), (int) (height / displayScale));
 		}
@@ -88,16 +95,16 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
 	int width = fbWidth[0];
 	int height = fbHeight[0];
 	
-	GLFW.glfwSetWindowSize(window, (int) (width / displayScale), (int) (height / displayScale));
+	//GLFW.glfwSetWindowSize(window, (int) (width / displayScale), (int) (height / displayScale));
 	// or should it be:
 	//GL33.glViewport(0, 0, (int) (width / displayScale), (int) (height / displayScale));
     }
     
     @Override
     public void simpleInitApp() {
-	initScreen();
-	setFramebufferSizeCallback();
-	//flyCam.setEnabled(false);
+	//initScreen();
+	//setFramebufferSizeCallback();
+	flyCam.setEnabled(false);
 	
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box", b);
@@ -108,7 +115,7 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
 
         rootNode.attachChild(geom);
     }
-
+    
     @Override
     public void simpleUpdate(float tpf) {
         //TODO: add update code
