@@ -148,9 +148,16 @@
               </configuration>
             </execution>
 
+            <execution>
+              <id>resizable</id>
+              <goals><goal>java</goal></goals>
+              <configuration>
+                <mainClass>org.mydomain.myproject.TestResizableApp</mainClass>
+              </configuration>
+            </execution>
 
 	    <execution>
-              <id>resizable</id>
+              <id>resizable-osx</id>
               <goals><goal>exec</goal></goals>
               <configuration>
                 <executable>java</executable>

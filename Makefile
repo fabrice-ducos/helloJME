@@ -14,9 +14,11 @@ MVN=mvn
 # one therefore uses another goal for launching on osx systems
 
 ifeq ($(detected_OS),Darwin)
-MVN_EXEC_GOAL=exec:exec@run-osx
+MAIN_RUN_EXEC_GOAL=exec:exec@run-osx
+RESIZ_EXEC_GOAL=exec:exec@resizable-osx
 else
-MVN_EXEC_GOAL=exec:java@run
+MAIN_RUN_EXEC_GOAL=exec:java@run
+RESIZ_EXEC_GOAL=exec:java@resizable
 endif
 
 .PHONY: test run start
@@ -31,10 +33,10 @@ comp compile:
 	$(MVN) compile
 
 run start: $(jarfile)
-	$(MVN) $(MVN_EXEC_GOAL)
+	$(MVN) $(MAIN_RUN_EXEC_GOAL)
 
 run-resizable run-resiz resizable resiz: $(jarfile)
-	$(MVN) exec:exec@resizable
+	$(MVN) $(RESIZ_EXEC_GOAL)
 
 test: $(jarfile)
 	$(MVN) test
