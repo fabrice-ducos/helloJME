@@ -8,36 +8,97 @@ import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext;
 import com.jme3.system.JmeContext.Type;
+import com.jme3.system.lwjgl.LwjglWindow;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWFramebufferSizeCallbackI;
+import org.lwjgl.opengl.GL33;
 
 public class JMonkeyApp extends SimpleApplication implements Runnable {
 
     // modes include: Type.Display (default), Type.Canvas, Type.Headless (server), Type.OffscreenSurface
-    JmeContext.Type context;
+    JmeContext.Type contextType;
     
     public static void main(String[] args) {
-	JmeContext.Type context = Type.Display;
+	JmeContext.Type contextType = Type.Display;
 	showArguments(args);
 	if (args.length > 0) {
-	    context = parseContextArg(args[0]);
+	    contextType = parseContextArg(args[0]);
 	}
-        JMonkeyApp app = new JMonkeyApp(context);
+        JMonkeyApp app = new JMonkeyApp(contextType);
         app.run();
     }
     
-    public JMonkeyApp(JmeContext.Type context) {
-	this.context = context;
+    public JMonkeyApp(JmeContext.Type contextType) {
+	this.contextType = contextType;
 	AppSettings settings = new AppSettings(true);
         settings.setTitle("Default Scene");
+	settings.setResizable(true);
         setSettings(settings);
     }
 
     @Override
     public void run() {
-        start(context);
+        start(contextType);
     }
 
+    private float getDisplayScale(long window) {
+	/* on most systems, the ratio between the sizes of framebuffer and window is 1:1;
+	 * on some systems (most notably Mac with Retina screens), the display scale may be different.
+	 */
+	
+	int[] fbWidth = { 0 };
+	int[] fbHeight = { 0 };
+	int[] scWidth = { 0 };
+	int[] scHeight = { 0 };
+	
+	GLFW.glfwGetFramebufferSize(window, fbWidth, fbHeight);
+	GLFW.glfwGetWindowSize(window, scWidth, scHeight);
+
+	float displayScale = fbWidth[0] / (float) scWidth[0];
+
+	return displayScale;
+    }
+    
+    private void setFramebufferSizeCallback() {
+	LwjglWindow lwjglContext = (LwjglWindow) context; // context is the Jme context
+	long wh = lwjglContext.getWindowHandle();
+
+	float displayScale = getDisplayScale(wh);
+	
+	/* some screens (e.g. Retina for MacBook Pro) require this */
+	GLFW.glfwSetFramebufferSizeCallback(wh, (long window, int width, int height) -> {
+		GLFW.glfwSetWindowSize(window, (int) (width / displayScale), (int) (height / displayScale));
+		// or should it be:
+		//GL33.glViewport(0, 0, (int) (width / displayScale), (int) (height / displayScale));
+		}
+	    );
+	
+    }
+
+    private void initScreen() {
+	// attempt to fix the resolution on Retina screens (should be neutral for other kinds of screens)
+	
+	LwjglWindow lwjglContext = (LwjglWindow) context; // context is the Jme context
+	long window = lwjglContext.getWindowHandle();
+	float displayScale = getDisplayScale(window);
+	int[] fbWidth = { 0 };
+	int[] fbHeight = { 0 };
+	
+	GLFW.glfwGetFramebufferSize(window, fbWidth, fbHeight);
+	int width = fbWidth[0];
+	int height = fbHeight[0];
+	
+	GLFW.glfwSetWindowSize(window, (int) (width / displayScale), (int) (height / displayScale));
+	// or should it be:
+	//GL33.glViewport(0, 0, (int) (width / displayScale), (int) (height / displayScale));
+    }
+    
     @Override
     public void simpleInitApp() {
+	initScreen();
+	setFramebufferSizeCallback();
+	//flyCam.setEnabled(false);
+	
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box", b);
 
