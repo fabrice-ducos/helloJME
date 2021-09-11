@@ -148,6 +148,21 @@
               </configuration>
             </execution>
 
+
+	    <execution>
+              <id>resizable</id>
+              <goals><goal>exec</goal></goals>
+              <configuration>
+                <executable>java</executable>
+		<arguments>
+                        <argument>-XstartOnFirstThread</argument>
+                        <argument>-classpath</argument>
+                        <classpath />
+                        <argument>org.mydomain.myproject.TestResizableApp</argument>
+		</arguments>
+              </configuration>
+            </execution>
+
           </executions>
         </plugin>
       </plugins>

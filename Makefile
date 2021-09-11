@@ -33,6 +33,9 @@ comp compile:
 run start: $(jarfile)
 	$(MVN) $(MVN_EXEC_GOAL)
 
+run-resizable run-resiz resizable resiz: $(jarfile)
+	$(MVN) exec:exec@resizable
+
 test: $(jarfile)
 	$(MVN) test
 
