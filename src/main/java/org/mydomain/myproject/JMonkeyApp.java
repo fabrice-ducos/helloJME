@@ -102,9 +102,11 @@ public class JMonkeyApp extends SimpleApplication implements Runnable {
     
     @Override
     public void simpleInitApp() {
-	//initScreen();
 	//setFramebufferSizeCallback();
-	flyCam.setEnabled(false);
+	//initScreen();
+	
+	//flyCam.setEnabled(false);
+	flyCam.setDragToRotate(true);
 	
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box", b);
